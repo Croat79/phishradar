@@ -4,7 +4,7 @@
 
 ## Description
 
-Easily customizable phishing domains scoring application based on cert streams. You are welcome to use the built-in algorithms (located in webapp/certstreams/scoring.py) or to develop your own (sharing is greatly appreciated). Works pretty well with defaults so in some cases your organization can stay even 24 hours ahead of phishing threats reported by popular feeds.
+Easily customizable phishing domains scoring application based on cert streams. Scales up thanks to parallel processing done with Redis and Celery. You are welcome to use the built-in algorithms (located in webapp/certstreams/scoring.py) or to develop your own (sharing is greatly appreciated). Works pretty well with defaults so in some cases your organization can stay even 24 hours ahead of phishing threats reported by popular feeds.
 
 ## Installation
 
