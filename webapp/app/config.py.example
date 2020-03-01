@@ -1,0 +1,48 @@
+CERTSTREAMS_PAGING_STEP = 64
+CERTSTREAMS_LOGS_SOURCE = 'https://www.gstatic.com/ct/log_list/all_logs_list.json'
+CERTSTREAMS_LOGS_IGNORED = (
+    'alpha.ctlogs.org',
+    'clicky.ct.letsencrypt.org',
+    'ct.akamai.com',
+    'ct.filippo.io/behindthesofa',
+    'ct.gdca.com.cn',
+    'ct.izenpe.com',
+    'ct.izenpe.eus',
+    'ct.sheca.com',
+    'ct.startssl.com',
+    'ct.wosign.com',
+    'ctlog.api.venafi.com',
+    'ctlog.gdca.com.cn',
+    'ctlog.sheca.com',
+    'ctlog.wosign.com',
+    'ctlog2.wosign.com',
+    'flimsy.ct.nordu.net:8080',
+    'log.certly.io',
+    'nessie2021.ct.digicert.com/log',
+    'plausible.ct.nordu.net',
+    'www.certificatetransparency.cn/ct',
+    'ct.ws.symantec.com',
+    'vega.ws.symantec.com',
+    'deneb.ws.symantec.com',
+    'sirius.ws.symantec.com',
+    'log.gdca.com.cn',
+    'log2.gdca.com.cn',
+    'ctserver.cnnic.cn',
+)
+CERTSTREAMS_FILTERS = (
+    'certstreams.filters.RemoveWildcards',
+    'certstreams.filters.DecodeIDNA',
+)
+CERTSTREAMS_SCORING = (
+    'certstreams.scoring.TLDs',
+    'certstreams.scoring.Dots',
+    'certstreams.scoring.Dashes',
+    'certstreams.scoring.Keywords',
+    'certstreams.scoring.Entropy',
+)
+CERTSTREAMS_GENERATORS_HOMOGLYPHS = {
+    'languages': ('en',)
+}
+CERTSTREAMS_FETCHING_QUEUE = 'fetching'
+CERTSTREAMS_SCORING_QUEUE = 'scoring'
+CERTSTREAMS_SCORING_CHUNK = 256

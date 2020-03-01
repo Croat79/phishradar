@@ -1,0 +1,227 @@
+[
+{
+    "model": "certstreams.keyword",
+    "pk": 10,
+    "fields": {
+        "name": "apple",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 11,
+    "fields": {
+        "name": "appIe",
+        "partial": false,
+        "original": 10
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 12,
+    "fields": {
+        "name": "dhl",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 13,
+    "fields": {
+        "name": "dhI",
+        "partial": false,
+        "original": 12
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 14,
+    "fields": {
+        "name": "dpd",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 15,
+    "fields": {
+        "name": "google",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 16,
+    "fields": {
+        "name": "googIe",
+        "partial": false,
+        "original": 15
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 17,
+    "fields": {
+        "name": "icloud",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 18,
+    "fields": {
+        "name": "icIoud",
+        "partial": false,
+        "original": 17
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 19,
+    "fields": {
+        "name": "live",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 20,
+    "fields": {
+        "name": "Iive",
+        "partial": false,
+        "original": 19
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 21,
+    "fields": {
+        "name": "microsoft",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 22,
+    "fields": {
+        "name": "olx",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 23,
+    "fields": {
+        "name": "oIx",
+        "partial": false,
+        "original": 22
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 24,
+    "fields": {
+        "name": "payment",
+        "partial": true,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 25,
+    "fields": {
+        "name": "paypal",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 26,
+    "fields": {
+        "name": "paypaI",
+        "partial": false,
+        "original": 25
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 27,
+    "fields": {
+        "name": "psd2",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 28,
+    "fields": {
+        "name": "store",
+        "partial": true,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 29,
+    "fields": {
+        "name": "tpp",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 30,
+    "fields": {
+        "name": "transfer",
+        "partial": true,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 31,
+    "fields": {
+        "name": "ups",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 32,
+    "fields": {
+        "name": "ebay",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 33,
+    "fields": {
+        "name": "aws",
+        "partial": false,
+        "original": null
+    }
+},
+{
+    "model": "certstreams.keyword",
+    "pk": 34,
+    "fields": {
+        "name": "amazon",
+        "partial": false,
+        "original": null
+    }
+}
+]

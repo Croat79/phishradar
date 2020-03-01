@@ -1,0 +1,5 @@
+.DS_Store
+docker-environ
+webapp/app/config.py
+webapp/celery.log
+__pycache__
