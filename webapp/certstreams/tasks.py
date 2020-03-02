@@ -1,7 +1,5 @@
 import base64
-import json
 import logging
-import urllib3
 
 from celery import shared_task
 from OpenSSL import crypto
