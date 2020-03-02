@@ -62,7 +62,7 @@ Now "reload" with new groups:
 
 #### Deploy:
 
-    user@host:~/ctihq$ docker-compose up --build --scale worker_fetching=10 --scale worker_scoring=6 -d
+    user@host:~/ctihq$ docker-compose up --build --scale worker_fetching=8 --scale worker_scoring=8 -d
 
 No worries about scheduler exiting, execute the command below (creates default user admin:admin):
 
