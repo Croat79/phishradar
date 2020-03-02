@@ -5,22 +5,20 @@ services:
   webapp:
     restart: always
     build: ./webapp
-    links:
-      - postgres:postgres
-      - redis:redis
+    depends_on:
+      - postgres
+      - redis
     volumes:
       - webapp-data:/srv/webapp
+      - static-data:/srv/webapp/static
     env_file: docker-environ
-    command: /usr/local/bin/gunicorn app.wsgi:application -w 2 -b :8000 --capture-output --enable-stdio-inheritance --log-level=info --access-logfile=- --log-file=- --chdir /srv/webapp --reload
+    command: /usr/local/bin/gunicorn app.wsgi:application -w 2 -b :8000 --capture-output --enable-stdio-inheritance --log-file - --access-logfile - --error-logfile - --log-level debug --chdir /srv/webapp --reload
 
   scheduler:
     restart: always
     build: ./webapp
     depends_on:
       - webapp
-    links:
-      - postgres:postgres
-      - redis:redis
     volumes:
       - webapp-data:/srv/webapp
       - tmp-data:/tmp/scheduler
@@ -31,10 +29,7 @@ services:
     restart: always
     build: ./webapp
     depends_on:
-      - webapp
-    links:
-      - postgres:postgres
-      - redis:redis
+      - scheduler
     volumes:
       - webapp-data:/srv/webapp
     env_file: docker-environ
@@ -44,10 +39,7 @@ services:
     restart: always
     build: ./webapp
     depends_on:
-      - webapp
-    links:
-      - postgres:postgres
-      - redis:redis
+      - scheduler
     volumes:
       - webapp-data:/srv/webapp
     env_file: docker-environ
@@ -55,17 +47,14 @@ services:
 
   http:
     restart: always
-    build: ./http/
+    image: nginx
     depends_on:
       - webapp
     ports:
       - "80:80"
-    depends_on:
-      - webapp
-    links:
-      - webapp:webapp
     volumes:
-      - webapp-data:/www/
+      - static-data:/www/static
+      - ./http/conf.d:/etc/nginx/conf.d
 
   postgres:
     restart: always
@@ -86,6 +75,7 @@ volumes:
   postgres-data:
   redis-data:
   webapp-data:
+  static-data:
   tmp-data:
     driver_opts:
       type: tmpfs

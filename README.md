@@ -2,6 +2,15 @@
 
     ░▒▓ ctihq ▓▒░ Your very own phishing detector
 
+    ∙∙┌─────────────┬────────────────▄
+      │▓███▓▒▀▓███▓ ▒▓█ ░▒▓█  ▓████▓ ▐
+      ▓█┐   ▒▌ ▓█  ▀│▓█  ▒▓█ ▓█  ░▒▓█▐
+      ▓█│   ▀  ▓█ ▓█│▓██████ ▓█   ▒▓█▐
+      ▓█│    ▐ ▓█ ▒█│▓█  ▒▓█ ▓█  ■ ▓█▐
+      ▓██  ▒██ ▒█ ▒█│▒█  ▒▓█ ▒█   ▌▓█▐
+      │░▒▓███  ░█ ░█│░█  ░▒█  ░▒████∙▐
+    ∙∙└─────────────┴────────────────▀
+
 ## Description
 
 * Easily customizable phishing domains scoring application based on cert streams.
