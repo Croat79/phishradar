@@ -90,28 +90,27 @@ def serialize_certificate(cert):
 def fetch_entries(url, source_id):
     try:
         response = requests.get(url).json()
-    except json.decoder.JSONDecodeError:
-        logger.error('Failed to fetch {} - empty response'.format(url))
-    except urllib3.exceptions.MaxRetryError:
-        logger.error('Failed to fetch {} - cannot connect'.format(url))
+    except Exception as exc:
+        logger.error('Failed to fetch {} due to {}'.format(url, exc))
     else:
-        objs = []
-        for entry in response['entries']:
-            mtl = construct.MerkleTreeHeader.parse(base64.b64decode(entry['leaf_input']))
-            if mtl.LogEntryType == 'X509LogEntryType':
-                cert_data = serialize_certificate(crypto.load_certificate(crypto.FILETYPE_ASN1, Certificate.parse(mtl.Entry).CertData))
-                for original, filtered in cert_data['domains'].items():
-                    logger.info('Fetched: {} ({})'.format(filtered, original))
-                    issuer, _ = models.Issuer.objects.get_or_create(name=cert_data['issuer'].decode('utf-8'))
-                    objs.append(models.Domain(
-                        source_id=source_id,
-                        name_original=original,
-                        name_filtered=filtered,
-                        fingerprint=cert_data['fingerprint'],
-                        serial_number=cert_data['serial_number'],
-                        issuer_id=issuer.id,
-                    ))
-        models.Domain.objects.bulk_create(objs)
+        if 'entries' in response:
+            objs = []
+            for entry in response['entries']:
+                mtl = construct.MerkleTreeHeader.parse(base64.b64decode(entry['leaf_input']))
+                if mtl.LogEntryType == 'X509LogEntryType':
+                    cert_data = serialize_certificate(crypto.load_certificate(crypto.FILETYPE_ASN1, Certificate.parse(mtl.Entry).CertData))
+                    for original, filtered in cert_data['domains'].items():
+                        logger.info('Fetched: {} ({})'.format(filtered, original))
+                        issuer, _ = models.Issuer.objects.get_or_create(name=cert_data['issuer'].decode('utf-8'))
+                        objs.append(models.Domain(
+                            source_id=source_id,
+                            name_original=original,
+                            name_filtered=filtered,
+                            fingerprint=cert_data['fingerprint'],
+                            serial_number=cert_data['serial_number'],
+                            issuer_id=issuer.id,
+                        ))
+            models.Domain.objects.bulk_create(objs)
 
 
 @shared_task
