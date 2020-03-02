@@ -40,11 +40,16 @@
 
     user@host:~/ctihq$ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     user@host:~/ctihq$ sudo curl -L "https://raw.githubusercontent.com/docker/compose/1.25.4/contrib/completion/bash/docker-compose" -o /etc/bash_completion.d/docker-compose
-    user@host:~/ctihq$ sudo chmod +x /usr/local/bin/docker-compose
+    user@host:~/ctihq$ sudo chmod ug+x /usr/local/bin/docker-compose
+    user@host:~/ctihq$ sudo chown :docker /usr/local/bin/docker-compose
 
 Final touch:
 
     user@host:~/ctihq$ sudo usermod -aG docker user
+
+Now "reload" with new groups:
+
+    user@host:~/ctihq$ su - $USER
 
 #### Deploy:
 
