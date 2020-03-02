@@ -63,7 +63,7 @@ No worries about scheduler exiting, execute the command below (creates default u
 
 - Login at http://admin:admin@yourserver/admin
 - Go to Sources and check "Enable" option for selected objects
-- Or see "Enabling all sources (via Django ORM)" below
+- Or see "Enabling all sources" below
 
 #### Initiate (or wait):
 
@@ -75,9 +75,17 @@ No worries about scheduler exiting, execute the command below (creates default u
 - Login at http://admin:admin@yourserver/admin
 - Go to Domains section
 
+## Documentation
+
+### Adding keywords
+
+* Homoglyphs are created for each new keyword (configurable in `webapp/app/config.py:CERTSTREAMS_GENERATORS_HOMOGLYPHS`).
+* Partial keywords add a bit to the domain scoring.
+
 ## Notes
 
 * Make sure NOT to expose your admin panel in the public network, there's no need for that. The application may live comfortably behind NAT.
+* Application needs to be restarted after new keywords or TLDs are added.
 
 ### Checking up on the webapp container
 
@@ -87,14 +95,21 @@ No worries about scheduler exiting, execute the command below (creates default u
 
     user@host:~/ctihq$ docker-compose down -v --rmi all
 
-### Enabling all sources (via Django ORM)
+### Enabling all sources
 
     user@host:~/ctihq$ docker-compose exec webapp bash
     # ./manage.py shell
     >>> from certstreams import models
     >>> models.Source.objects.update(enabled=True)
 
-### Deleting data (via Django ORM)
+### Reset scores for all domains
+
+    user@host:~/ctihq$ docker-compose exec webapp bash
+    # ./manage.py shell
+    >>> from certstreams import models
+    >>> models.Domain.objects.update(score=None)
+
+### Deleting data
 
     user@host:~/ctihq$ docker-compose exec webapp bash
     # ./manage.py shell
