@@ -124,6 +124,10 @@ Or enable all:
 
     user@host:~/ctihq$ docker-compose --env-file ./docker-environ run webapp /usr/local/bin/python /srv/webapp/manage.py score_reset
 
+### Run cleaning manually
+
+    user@host:~/ctihq$ docker-compose --env-file ./docker-environ run webapp /usr/local/bin/python /srv/webapp/manage.py cleaning
+
 ### Deleting data
 
     user@host:~/ctihq$ docker-compose exec webapp bash

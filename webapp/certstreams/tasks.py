@@ -149,3 +149,10 @@ def score_all():
     for idx in range(0, len(domain_pks), settings.CERTSTREAMS_SCORING_CHUNK):
         chunk = domain_pks[idx:idx + settings.CERTSTREAMS_SCORING_CHUNK]
         score_domains.apply_async(queue=settings.CERTSTREAMS_SCORING_QUEUE, args=(chunk,))
+
+
+@shared_task
+def cleaning():
+    qs = models.Domain.objects.filter(score__lt=settings.CERTSTREAMS_CLEANING_SCORE).order_by('datetime_added')
+    pks = qs.values_list('pk', flat=True)[:int(qs.count() * settings.CERTSTREAMS_CLEANING_OLDEST)]
+    models.Domain.objects.filter(pk__in=pks).delete()

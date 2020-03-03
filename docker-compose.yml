@@ -43,7 +43,7 @@ services:
     volumes:
       - webapp-data:/srv/webapp
     env_file: docker-environ
-    command: celery -A app worker -l info -Q scoring
+    command: celery -A app worker -l info -Q scoring,utility
 
   http:
     restart: always

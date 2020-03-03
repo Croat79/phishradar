@@ -16,6 +16,18 @@
     }
 },
 {
+    "model": "django_celery_beat.crontabschedule",
+    "pk": 1,
+    "fields": {
+        "minute": "*",
+        "hour": "23",
+        "day_of_week": "*",
+        "day_of_month": "*",
+        "month_of_year": "*",
+        "timezone": "UTC"
+    }
+},
+{
     "model": "django_celery_beat.periodictask",
     "pk": 1,
     "fields": {
@@ -60,6 +72,34 @@
         "headers": "{}",
         "priority": null,
         "expires": null,
+        "one_off": false,
+        "start_time": "2020-03-01T12:00:00Z",
+        "enabled": true,
+        "last_run_at": null,
+        "total_run_count": 0,
+        "date_changed": "2020-03-01T12:00:00Z",
+        "description": ""
+    }
+},
+{
+    "model": "django_celery_beat.periodictask",
+    "pk": 3,
+    "fields": {
+        "name": "Cleaning",
+        "task": "certstreams.tasks.cleaning",
+        "interval": null,
+        "crontab": 1,
+        "solar": null,
+        "clocked": null,
+        "args": "[]",
+        "kwargs": "{}",
+        "queue": "utility",
+        "exchange": null,
+        "routing_key": null,
+        "headers": "{}",
+        "priority": null,
+        "expires": null,
+        "expire_seconds": null,
         "one_off": false,
         "start_time": "2020-03-01T12:00:00Z",
         "enabled": true,
