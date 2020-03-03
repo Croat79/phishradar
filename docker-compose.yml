@@ -59,7 +59,26 @@ services:
   postgres:
     restart: always
     image: postgres
-    command: postgres -c max_connections=200 -c shared_buffers=1GB -c effective_cache_size=3GB
+    command: "postgres
+      -c checkpoint_completion_target=${PG_CHECKPOINT_COMPLETION_TARGET}
+      -c checkpoint_segments=${PG_CHECKPOINT_SEGMENTS}
+      -c default_statistics_target=${PG_DEFAULT_STATISTICS_TARGET}
+      -c effective_cache_size=${PG_EFFECTIVE_CACHE_SIZE}
+      -c effective_io_concurrency=${PG_EFFECTIVE_IO_CONCURRENCY}
+      -c log_min_duration_statement=${PG_LOG_MIN_DURATION_STATEMENT}
+      -c maintenance_work_mem=${PG_MAINTENANCE_WORK_MEM}
+      -c max_connections=${PG_MAX_CONNECTIONS}
+      -c max_parallel_maintenance_workers=${PG_MAX_PARALLEL_MAINTENANCE_WORKERS}
+      -c max_parallel_workers=${PG_MAX_PARALLEL_WORKERS}
+      -c max_parallel_workers_per_gather=${PG_MAX_PARALLEL_WORKERS_PER_GATHER}
+      -c max_wal_size=${PG_MAX_WAL_SIZE}
+      -c max_worker_processes=${PG_MAX_WORKER_PROCESSES}
+      -c min_wal_size=${PG_MIN_WAL_SIZE}
+      -c random_page_cost=${PG_RANDOM_PAGE_COST}
+      -c shared_buffers=${PG_SHARED_BUFFERS}
+      -c wal_buffers=${PG_WAL_BUFFERS}
+      -c work_mem=${PG_WORK_MEM}
+    "
     volumes:
       - postgres-data:/var/lib/postgresql/data/
     env_file: docker-environ
