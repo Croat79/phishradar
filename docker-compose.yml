@@ -59,9 +59,8 @@ services:
   postgres:
     restart: always
     image: postgres
-    command: "postgres
+    command: postgres
       -c checkpoint_completion_target=${PG_CHECKPOINT_COMPLETION_TARGET}
-      -c checkpoint_segments=${PG_CHECKPOINT_SEGMENTS}
       -c default_statistics_target=${PG_DEFAULT_STATISTICS_TARGET}
       -c effective_cache_size=${PG_EFFECTIVE_CACHE_SIZE}
       -c effective_io_concurrency=${PG_EFFECTIVE_IO_CONCURRENCY}
@@ -78,7 +77,6 @@ services:
       -c shared_buffers=${PG_SHARED_BUFFERS}
       -c wal_buffers=${PG_WAL_BUFFERS}
       -c work_mem=${PG_WORK_MEM}
-    "
     volumes:
       - postgres-data:/var/lib/postgresql/data/
     env_file: docker-environ
