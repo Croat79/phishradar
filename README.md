@@ -72,7 +72,11 @@ No worries about scheduler exiting, execute the command below (creates default u
 
 - Login at http://admin:admin@yourserver/admin
 - Go to Sources and check "Enable" option for selected objects
-- Or see "Enabling all sources" below
+
+Or enable all:
+
+    user@host:~/ctihq$ docker-compose run webapp /usr/local/bin/python /srv/webapp/manage.py enable_all
+
 
 #### Initiate (or wait):
 
@@ -104,19 +108,9 @@ No worries about scheduler exiting, execute the command below (creates default u
 
     user@host:~/ctihq$ docker-compose down -v --rmi all
 
-### Enabling all sources
-
-    user@host:~/ctihq$ docker-compose exec webapp bash
-    # ./manage.py shell
-    >>> from certstreams import models
-    >>> models.Source.objects.update(enabled=True)
-
 ### Reset scores for all domains
 
-    user@host:~/ctihq$ docker-compose exec webapp bash
-    # ./manage.py shell
-    >>> from certstreams import models
-    >>> models.Domain.objects.update(score=None)
+    user@host:~/ctihq$ docker-compose run webapp /usr/local/bin/python /srv/webapp/manage.py score_reset
 
 ### Deleting data
 
