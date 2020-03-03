@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.contrib import admin
 
 from certstreams import models
@@ -6,7 +7,7 @@ from certstreams import models
 class DomainAdmin(admin.ModelAdmin):
 
     list_display = ('name_filtered', 'name_original', 'score')
-    ordering = ('score',)
+    ordering = (F('score').desc(nulls_last=True),)
     search_fields = ('name_filtered', 'name_original',)
 
 
