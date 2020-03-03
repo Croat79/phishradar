@@ -75,13 +75,13 @@ No worries about scheduler exiting, execute the command below (creates default u
 
 Or enable all:
 
-    user@host:~/ctihq$ docker-compose run webapp /usr/local/bin/python /srv/webapp/manage.py enable_all
+    user@host:~/ctihq$ docker-compose --env-file ./docker-environ run webapp /usr/local/bin/python /srv/webapp/manage.py enable_all
 
 
 #### Initiate (or wait):
 
-    user@host:~/ctihq$ docker-compose run webapp /usr/local/bin/python /srv/webapp/manage.py fetch_all
-    user@host:~/ctihq$ docker-compose run webapp /usr/local/bin/python /srv/webapp/manage.py score_all
+    user@host:~/ctihq$ docker-compose --env-file ./docker-environ run webapp /usr/local/bin/python /srv/webapp/manage.py fetch_all
+    user@host:~/ctihq$ docker-compose --env-file ./docker-environ run webapp /usr/local/bin/python /srv/webapp/manage.py score_all
 
 #### Review results
 
@@ -110,7 +110,7 @@ Or enable all:
 
 ### Reset scores for all domains
 
-    user@host:~/ctihq$ docker-compose run webapp /usr/local/bin/python /srv/webapp/manage.py score_reset
+    user@host:~/ctihq$ docker-compose --env-file ./docker-environ run webapp /usr/local/bin/python /srv/webapp/manage.py score_reset
 
 ### Deleting data
 
