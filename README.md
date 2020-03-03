@@ -20,6 +20,19 @@
 
 ## Installation
 
+### The simple version (for testing out)
+
+Assuming you have the latest Docker (and docker-compose):
+
+    % docker-compose --env-file ./docker-environ up
+    % ./bin/init.sh
+
+Now open http://localhost/admin and enable at least one source.
+
+    % ./bin/do_all.sh
+
+View results at http://localhost/admin/certstreams/domain/
+
 ### Debian 10.x
 
 #### Download:
@@ -80,8 +93,7 @@ Or enable all:
 
 #### Initiate (or wait):
 
-    user@host:~/ctihq$ docker-compose --env-file ./docker-environ run webapp /usr/local/bin/python /srv/webapp/manage.py fetch_all
-    user@host:~/ctihq$ docker-compose --env-file ./docker-environ run webapp /usr/local/bin/python /srv/webapp/manage.py score_all
+    user@host:~/ctihq$ ./bin/do_all.sh
 
 #### Review results
 
