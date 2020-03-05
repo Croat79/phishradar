@@ -9,4 +9,3 @@ pyOpenSSL==19.1.0
 homoglyphs
 tld
 django-celery-beat
-flower

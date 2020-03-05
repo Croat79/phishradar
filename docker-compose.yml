@@ -4,7 +4,9 @@ services:
 
   webapp:
     restart: always
-    build: ./webapp
+    build:
+      context: .
+      dockerfile: ./webapp/Dockerfile
     depends_on:
       - postgres
       - redis
@@ -16,7 +18,9 @@ services:
 
   scheduler:
     restart: always
-    build: ./webapp
+    build:
+      context: .
+      dockerfile: ./worker/Dockerfile
     depends_on:
       - webapp
     volumes:
@@ -27,7 +31,9 @@ services:
 
   worker_fetching:
     restart: always
-    build: ./webapp
+    build:
+      context: .
+      dockerfile: ./worker/Dockerfile
     depends_on:
       - scheduler
     volumes:
@@ -37,7 +43,9 @@ services:
 
   worker_scoring:
     restart: always
-    build: ./webapp
+    build:
+      context: .
+      dockerfile: ./worker/Dockerfile
     depends_on:
       - scheduler
     volumes:
@@ -45,15 +53,17 @@ services:
     env_file: docker-environ
     command: celery -A app worker -l info -Q scoring,utility
 
-  worker_monitoring:
+  monitoring:
     restart: always
-    build: ./webapp
+    build:
+      context: .
+      dockerfile: ./monitoring/Dockerfile
     depends_on:
       - scheduler
     volumes:
       - webapp-data:/srv/webapp
     env_file: docker-environ
-    command: celery flower -A proj --address=0.0.0.0 --port=5555
+    command: celery flower -A app --address=0.0.0.0 --port=5555
 
   http:
     restart: always
