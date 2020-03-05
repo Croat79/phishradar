@@ -75,7 +75,7 @@ Now "reload" with new groups:
 
 #### Deploy:
 
-    user@host:~/ctihq$ docker-compose --env-file ./docker-environ up --build --scale worker_fetching=8 --scale worker_scoring=8 -d
+    user@host:~/ctihq$ docker-compose --env-file ./docker-environ up --build --scale worker_fetching=2 --scale worker_scoring=2 -d
 
 No worries about scheduler exiting, execute the command below (creates default user admin:admin):
 
@@ -118,7 +118,19 @@ Or enable all:
 
 ### Starting from scratch
 
+Removing volumes (database included):
+
     user@host:~/ctihq$ docker-compose down -v --rmi all
+
+Preserving volumes:
+
+    user@host:~/ctihq$ docker-compose down --rmi all
+
+Rebuilding containers:
+
+    user@host:~/ctihq$ docker volume rm ctihq_webapp-data
+    user@host:~/ctihq$ docker-compose --env-file ./docker-environ build --no-cache --force-rm
+    user@host:~/ctihq$ docker-compose --env-file ./docker-environ up --force-recreate --scale worker_fetching=2 --scale worker_scoring=2 -d
 
 ### Reset scores for all domains
 
