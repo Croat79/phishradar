@@ -87,8 +87,11 @@ services:
       -c shared_buffers=${PG_SHARED_BUFFERS}
       -c wal_buffers=${PG_WAL_BUFFERS}
       -c work_mem=${PG_WORK_MEM}
+      -c temp_tablespaces='tmp_tbs'
     volumes:
       - postgres-data:/var/lib/postgresql/data/
+      - postgres-tmp:/var/tmp/postgres
+      - ./postgres/tmp_tbs.sql:/docker-entrypoint-initdb.d/tmp_tbs.sql
     env_file: docker-environ
 
   redis:
@@ -100,6 +103,11 @@ services:
 
 volumes:
   postgres-data:
+  postgres-tmp:
+    driver_opts:
+      type: none
+      device: $PWD/postgres/tmp
+      o: bind
   redis-data:
   webapp-data:
   static-data:
