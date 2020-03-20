@@ -98,7 +98,7 @@ def fetch_entries(url, source_id):
                 if mtl.LogEntryType == 'X509LogEntryType':
                     cert_data = serialize_certificate(crypto.load_certificate(crypto.FILETYPE_ASN1, Certificate.parse(mtl.Entry).CertData))
                     for original, filtered in cert_data['domains'].items():
-                        logger.info('Fetched: {} ({})'.format(filtered, original))
+                        logger.debug('Fetched: {} ({})'.format(filtered, original))
                         issuer, _ = models.Issuer.objects.get_or_create(name=cert_data['issuer'].decode('utf-8'))
                         objs.append(models.Domain(
                             source_id=source_id,
