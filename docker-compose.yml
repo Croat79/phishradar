@@ -35,7 +35,6 @@ services:
       context: .
       dockerfile: ./worker/Dockerfile
     depends_on:
-      - postgres
       - scheduler
     volumes:
       - ./webapp:/srv/webapp
@@ -48,7 +47,6 @@ services:
       context: .
       dockerfile: ./worker/Dockerfile
     depends_on:
-      - postgres
       - scheduler
     volumes:
       - ./webapp:/srv/webapp
