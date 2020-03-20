@@ -28,6 +28,7 @@ CERTSTREAMS_LOGS_IGNORED = (
     'log.gdca.com.cn',
     'log2.gdca.com.cn',
     'ctserver.cnnic.cn',
+    'ct.browser.360.cn',
 )
 CERTSTREAMS_FILTERS = (
     'certstreams.filters.RemoveWildcards',
