@@ -11,7 +11,7 @@ services:
       - postgres
       - redis
     volumes:
-      - webapp-data:/srv/webapp
+      - ./webapp:/srv/webapp
       - static-data:/srv/webapp/static
     env_file: docker-environ
     command: /usr/local/bin/gunicorn app.wsgi:application -w 2 -b :8000 --capture-output --enable-stdio-inheritance --log-file - --access-logfile - --error-logfile - --log-level debug --chdir /srv/webapp --reload
@@ -24,7 +24,7 @@ services:
     depends_on:
       - webapp
     volumes:
-      - webapp-data:/srv/webapp
+      - ./webapp:/srv/webapp
       - tmp-data:/tmp/scheduler
     env_file: docker-environ
     command: celery -A app beat --scheduler django_celery_beat.schedulers:DatabaseScheduler --pidfile=/tmp/scheduler/celerybeat.pid -l info
@@ -37,7 +37,7 @@ services:
     depends_on:
       - scheduler
     volumes:
-      - webapp-data:/srv/webapp
+      - ./webapp:/srv/webapp
     env_file: docker-environ
     command: celery -A app worker -l info -Q fetching
 
@@ -49,7 +49,7 @@ services:
     depends_on:
       - scheduler
     volumes:
-      - webapp-data:/srv/webapp
+      - ./webapp:/srv/webapp
     env_file: docker-environ
     command: celery -A app worker -l info -Q scoring,utility
 
@@ -61,7 +61,7 @@ services:
     depends_on:
       - scheduler
     volumes:
-      - webapp-data:/srv/webapp
+      - ./webapp:/srv/webapp
     env_file: docker-environ
     command: celery flower -A app --address=0.0.0.0 --port=5555
 
@@ -111,7 +111,6 @@ services:
 volumes:
   postgres-data:
   redis-data:
-  webapp-data:
   static-data:
   tmp-data:
     driver_opts:
