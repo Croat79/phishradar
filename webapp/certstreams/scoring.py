@@ -21,6 +21,9 @@ class Scoring:
     def score(self, domain):
         raise NotImplementedError
 
+    def replace_multiple(self, char, value):
+        return re.sub(char + '+', char, value)
+
     def words(self, domain):
         result = tld.get_tld(domain, as_object=True, fail_silently=True, fix_protocol=True)
         if result:
@@ -41,16 +44,26 @@ class TLDs(Scoring):
         return 0
 
 
-class Dots(Scoring):
+class Char(Scoring):
+
+    char = None
+    weight = None
 
     def score(self, domain):
-        return domain.count('.') * 2
+        purified = self.replace_multiple(self.char, domain)
+        return purified.count(self.char) * self.weight
 
 
-class Dashes(Scoring):
+class Dots(Char):
 
-    def score(self, domain):
-        return domain.count('-') * 4
+    char = '.'
+    weight = 2
+
+
+class Dashes(Char):
+
+    char = '-'
+    weight = 4
 
 
 class Keywords(Scoring):
