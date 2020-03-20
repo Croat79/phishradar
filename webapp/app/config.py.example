@@ -28,7 +28,10 @@ CERTSTREAMS_LOGS_IGNORED = (
     'log.gdca.com.cn',
     'log2.gdca.com.cn',
     'ctserver.cnnic.cn',
-    'ct.browser.360.cn',
+    'ct.browser.360.cn/2020',
+    'ct.browser.360.cn/2021',
+    'ct.browser.360.cn/2022',
+    'ct.browser.360.cn/2023',
 )
 CERTSTREAMS_FILTERS = (
     'certstreams.filters.RemoveWildcards',
