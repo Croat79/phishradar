@@ -35,18 +35,6 @@ View results at http://localhost/admin/certstreams/domain/
 
 ### Debian 10.x
 
-#### Download:
-
-    user@host:~$ git clone https://github.com/tasooshi/ctihq.git
-    user@host:~$ cd ctihq
-
-#### Adjust configuration files:
-
-    user@host:~/ctihq$ cp docker-environ.example docker-environ
-    user@host:~/ctihq$ cp webapp/app/config.py.example webapp/app/config.py
-    user@host:~/ctihq$ nano docker-environ
-    user@host:~/ctihq$ nano webapp/app/config.py
-
 #### Install dependencies:
 
 **Source: https://docs.docker.com/install/linux/docker-ce/debian/**
@@ -73,9 +61,21 @@ Now "reload" with new groups:
 
     user@host:~/ctihq$ su - $USER
 
+#### Download:
+
+    user@host:~$ git clone https://github.com/tasooshi/ctihq.git
+    user@host:~$ cd ctihq
+
+#### Adjust configuration files:
+
+    user@host:~/ctihq$ cp docker-environ.example docker-environ
+    user@host:~/ctihq$ cp webapp/app/config.py.example webapp/app/config.py
+    user@host:~/ctihq$ vim docker-environ
+    user@host:~/ctihq$ vim webapp/app/config.py
+
 #### Deploy:
 
-    user@host:~/ctihq$ docker-compose --env-file ./docker-environ up --build --scale worker_fetching=2 --scale worker_scoring=2 -d
+    user@host:~/ctihq$ docker-compose --env-file ./docker-environ up --build --scale worker_fetching=4 --scale worker_scoring=4 -d
 
 No worries about scheduler exiting, execute the command below (creates default user admin:admin):
 
@@ -89,7 +89,6 @@ No worries about scheduler exiting, execute the command below (creates default u
 Or enable all:
 
     user@host:~/ctihq$ docker-compose --env-file ./docker-environ run webapp /usr/local/bin/python /srv/webapp/manage.py enable_all
-
 
 #### Initiate (or wait):
 
@@ -130,7 +129,7 @@ Rebuilding containers:
 
     user@host:~/ctihq$ docker volume rm ctihq_webapp-data
     user@host:~/ctihq$ docker-compose --env-file ./docker-environ build --no-cache --force-rm
-    user@host:~/ctihq$ docker-compose --env-file ./docker-environ up --force-recreate --scale worker_fetching=2 --scale worker_scoring=2 -d
+    user@host:~/ctihq$ docker-compose --env-file ./docker-environ up --force-recreate --scale worker_fetching=4 --scale worker_scoring=4 -d
 
 ### Reset scores for all domains
 
@@ -147,3 +146,14 @@ Rebuilding containers:
     >>> from certstreams import models
     >>> models.Source.objects.all().delete()
     >>> models.Domain.objects.all().delete()
+
+## Troubleshooting
+
+### Docker interferes with firewall
+
+    /etc/docker/daemon.json:
+
+    {
+        "iptables": false
+    }
+
