@@ -1,8 +1,13 @@
+import logging
+
 import idna
 
 from django.conf import settings
 
 from certstreams import imports
+
+
+logger = logging.getLogger('app')
 
 
 class Filter:
@@ -23,7 +28,10 @@ class RemoveWildcards(Filter):
 class DecodeIDNA(Filter):
 
     def filter(self, value):
-        return idna.decode(value)
+        try:
+            return idna.decode(value)
+        except Exception as exc:
+            logger.error(exc, ' = ', value)
 
 
 filters = []

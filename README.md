@@ -127,7 +127,6 @@ Preserving volumes:
 
 Rebuilding containers:
 
-    user@host:~/ctihq$ docker volume rm ctihq_webapp-data
     user@host:~/ctihq$ docker-compose --env-file ./docker-environ build --no-cache --force-rm
     user@host:~/ctihq$ docker-compose --env-file ./docker-environ up --force-recreate --scale worker_fetching=4 --scale worker_scoring=4 -d
 

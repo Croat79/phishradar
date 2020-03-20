@@ -11,9 +11,9 @@ from certstreams import (
 )
 
 
-KEYWORDS = models.Keyword.objects.filter(partial=False).values_list('name', flat=True)
-PARTIALS = models.Keyword.objects.filter(partial=True).values_list('name', flat=True)
-TLDS = models.TLD.objects.all()
+KEYWORDS = models.Keyword.objects.filter(partial=False)
+PARTIALS = models.Keyword.objects.filter(partial=True)
+TLDS = models.TLD.objects.all().values_list('name', flat=True)
 
 
 class Scoring:
@@ -72,16 +72,19 @@ class Keywords(Scoring):
         score = 0
         words = self.words(domain)
         for keyword in KEYWORDS:
-            if keyword in domain:
-                score += 5
-        for keyword in KEYWORDS:
-            if keyword in words:
-                score += 20
-                words.remove(keyword)
+            if keyword.matching_startswith:
+                if domain.startswith(keyword.name):
+                    score += keyword.weight
+            elif keyword.matching_endswith:
+                if domain.endswith(keyword.name):
+                    score += keyword.weight
+            elif keyword.name in words:
+                score += keyword.weight
+                words.remove(keyword.name)
         for partial in PARTIALS:
             for word in words:
-                if partial in word:
-                    score += 3
+                if partial.name in word:
+                    score += partial.weight
         return score
 
 
