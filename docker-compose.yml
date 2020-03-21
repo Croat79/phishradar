@@ -71,7 +71,7 @@ services:
     depends_on:
       - webapp
     ports:
-      - "80:80"
+      - "127.0.0.1:80:80"
     volumes:
       - static-data:/www/static
       - ./http/conf.d:/etc/nginx/conf.d
