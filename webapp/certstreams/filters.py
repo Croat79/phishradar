@@ -30,8 +30,8 @@ class DecodeIDNA(Filter):
     def filter(self, value):
         try:
             return idna.decode(value)
-        except Exception as exc:
-            logger.error(exc, ' = ', value)
+        except idna.core.IDNAError:
+            return value
 
 
 filters = []
