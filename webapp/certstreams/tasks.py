@@ -8,6 +8,7 @@ import requests
 
 from django.conf import settings
 from django.db import transaction
+from django.db.models import F
 
 from certstreams import (
     filters,
@@ -156,3 +157,5 @@ def cleaning():
     qs = models.Domain.objects.filter(score__lt=settings.CERTSTREAMS_CLEANING_SCORE).order_by('datetime_added')
     pks = qs.values_list('pk', flat=True)[:int(qs.count() * settings.CERTSTREAMS_CLEANING_OLDEST)]
     models.Domain.objects.filter(pk__in=pks).delete()
+    models.Domain.objects.update(score=F('score') - settings.CERTSTREAMS_CLEANING_DOWNGRADE)
+
