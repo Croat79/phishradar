@@ -14,7 +14,7 @@ services:
       - ./webapp:/srv/webapp
       - static-data:/srv/webapp/static
     env_file: docker-environ
-    command: /usr/local/bin/gunicorn app.wsgi:application -w 2 -b :8000 --capture-output --enable-stdio-inheritance --log-file - --access-logfile - --error-logfile - --log-level info --chdir /srv/webapp --reload
+    command: /usr/local/bin/gunicorn app.wsgi:application -w 2 -b :8000 --timeout=300 --capture-output --enable-stdio-inheritance --log-file - --access-logfile - --error-logfile - --log-level info --chdir /srv/webapp --reload
 
   scheduler:
     restart: always
