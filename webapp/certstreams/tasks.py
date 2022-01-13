@@ -158,4 +158,3 @@ def cleaning():
     pks = qs.values_list('pk', flat=True)[:int(qs.count() * settings.CERTSTREAMS_CLEANING_OLDEST)]
     models.Domain.objects.filter(pk__in=pks).delete()
     models.Domain.objects.update(score=F('score') - settings.CERTSTREAMS_CLEANING_DOWNGRADE)
-

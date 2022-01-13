@@ -28,7 +28,7 @@ class Scoring:
         result = tld.get_tld(domain, as_object=True, fail_silently=True, fix_protocol=True)
         if result:
             without_tld = '.'.join([result.subdomain, result.domain])
-            words = re.split('\W+', without_tld)
+            words = re.split(r'\W+', without_tld)
             return words
         else:
             return list()

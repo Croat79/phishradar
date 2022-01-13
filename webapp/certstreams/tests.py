@@ -21,4 +21,3 @@ class FiltersTestCase(TestCase):
             filter_domains(domains),
             ['example.com']
         )
-

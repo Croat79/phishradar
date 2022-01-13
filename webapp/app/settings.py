@@ -129,4 +129,4 @@ LOGGING = {
 
 dictConfig(LOGGING)
 
-from .config import *
+from .config import *  # noqa
