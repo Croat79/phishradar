@@ -1,3 +1,5 @@
+from json import decoder
+
 import requests
 
 from django.core.management.base import BaseCommand
@@ -14,7 +16,7 @@ class Command(BaseCommand):
             url = '{}/ct/v1/get-sth'.format(src.url)
             try:
                 response = requests.get(url).json()
-            except requests.ConnectionError:
+            except (requests.ConnectionError, decoder.JSONDecodeError):
                 src.broken = True
                 self.stdout.write(self.style.SUCCESS('Initialization failed for {}'.format(src)))
             else:

@@ -24,7 +24,7 @@ Now open http://localhost/admin-phishradar and enable at least one source.
 
 View results at http://localhost/admin-phishradar/certstreams/domain/
 
-### Debian 10.x
+### Debian 11.x
 
 #### Install dependencies:
 
@@ -39,8 +39,8 @@ View results at http://localhost/admin-phishradar/certstreams/domain/
 
 **Source: https://docs.docker.com/compose/install/**
 
-    user@host:~/phishradar$ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    user@host:~/phishradar$ sudo curl -L "https://raw.githubusercontent.com/docker/compose/1.25.4/contrib/completion/bash/docker-compose" -o /etc/bash_completion.d/docker-compose
+    user@host:~/phishradar$ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    user@host:~/phishradar$ sudo curl -L "https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose" -o /etc/bash_completion.d/docker-compose
     user@host:~/phishradar$ sudo chmod ug+x /usr/local/bin/docker-compose
     user@host:~/phishradar$ sudo chown :docker /usr/local/bin/docker-compose
 
@@ -68,7 +68,9 @@ Now "reload" with new groups:
 
     user@host:~/phishradar$ docker-compose --env-file ./docker-environ up --build --scale worker_fetching=4 --scale worker_scoring=4 -d
 
-No worries about scheduler exiting, execute the command below (creates default user admin:admin):
+#### Initialize:
+
+No worries about scheduler exiting, execute the command below (creates default admin user):
 
     user@host:~/phishradar$ ./bin/init.sh
 
@@ -81,7 +83,7 @@ Or enable all:
 
     user@host:~/phishradar$ docker-compose --env-file ./docker-environ run webapp /usr/local/bin/python /srv/webapp/manage.py enable_all
 
-#### Initiate (or wait):
+#### Initiate (or wait for the scheduled task to kick in):
 
     user@host:~/phishradar$ ./bin/do_all.sh
 
@@ -120,6 +122,8 @@ Rebuilding containers:
 
     user@host:~/phishradar$ docker-compose --env-file ./docker-environ build --no-cache --force-rm
     user@host:~/phishradar$ docker-compose --env-file ./docker-environ up --force-recreate --scale worker_fetching=4 --scale worker_scoring=4 -d
+
+Now go back to the "Initialize" section.
 
 ### Reset scores for all domains
 
