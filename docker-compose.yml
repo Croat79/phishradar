@@ -71,7 +71,7 @@ services:
     depends_on:
       - webapp
     ports:
-      - "127.0.0.1:80:80"
+      - "0.0.0.0:80:80"
     volumes:
       - static-data:/www/static
       - ./http/conf.d:/etc/nginx/conf.d
@@ -104,6 +104,7 @@ services:
   redis:
     restart: always
     image: redis
+    command: redis-server --requirepass CHANGEME
     volumes:
       - redis-data:/data
     env_file: docker-environ

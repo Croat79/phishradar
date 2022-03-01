@@ -86,11 +86,13 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-CELERY_BROKER_URL = 'redis://{}@redis:6379'.format(os.environ['REDIS_PASSWORD'])
-CELERY_RESULT_BACKEND = 'redis://{}@redis:6379'.format(os.environ['REDIS_PASSWORD'])
+CELERY_BROKER_URL = 'redis://{}:{}@redis:6379'.format(os.environ['REDIS_USERNAME'], os.environ['REDIS_PASSWORD'])
+CELERY_RESULT_BACKEND = 'redis://{}:{}@redis:6379'.format(os.environ['REDIS_USERNAME'], os.environ['REDIS_PASSWORD'])
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
