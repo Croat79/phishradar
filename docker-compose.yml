@@ -53,18 +53,6 @@ services:
     env_file: docker-environ
     command: celery -A app worker -l info -Q scoring,utility
 
-  monitoring:
-    restart: always
-    build:
-      context: .
-      dockerfile: ./monitoring/Dockerfile
-    depends_on:
-      - scheduler
-    volumes:
-      - ./webapp:/srv/webapp
-    env_file: docker-environ
-    command: celery flower -A app --address=0.0.0.0 --port=5555
-
   http:
     restart: always
     image: nginx
